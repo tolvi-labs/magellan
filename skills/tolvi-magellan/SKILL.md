@@ -25,8 +25,9 @@ Cut the approved `how` into a task list against Forge's `tasks.json` fields: `id
 
 Before showing the engineer anything, run this self-check:
 - **Acyclic** — `dependencies` topologically order. A cycle means re-cut before proceeding.
+- **Resolvable** — every `dependencies` entry names another task's `id` that actually exists in this same cut. A dangling reference is fixed before the DAG is ever shown to the engineer; Forge's own `load_manifest` rejects such a file outright, so an unresolved id is a hard failure at execution time, not a nit.
 - **Provable** — every task has at least one `acceptance_criteria` entry.
-- **Scoped** — the union of every task's `files` stays inside `scope.in`; nothing touches `scope.out`. If a cut seems to need an out-of-scope file, do not silently include it — surface it as a flag in the DAG review below.
+- **Scoped** — the union of every task's `files` stays inside `scope.in`; nothing touches `scope.out`. If a cut seems to need an out-of-scope file, do not silently include it — surface it as a flag in the DAG review below. A `scope.in`/`scope.out` entry that is not a file or directory path (Bastion also allows a prose area like "the auth module") cannot be matched against `files[]` literally: treat it as an advisory area constraint, carried into the DAG gate as context for the engineer to judge, rather than flagging every task as a violation of it.
 
 **DAG gate** — an all-at-once review, not a one-at-a-time question loop:
 
@@ -63,7 +64,7 @@ No separate approval gate here — Phase 2's DAG gate is the only hard gate. Thi
 
 ## Phase 4 — Emit, route, and stop
 
-Write the compiled artifact to `docs/superpowers/plans/YYYY-MM-DD-<feature-slug>-tasks.json` in the target repo (already globally gitignored — never stage or commit it):
+Write the compiled artifact to `docs/superpowers/plans/YYYY-MM-DD-<feature-slug>-tasks.json` in the target repo (never stage or commit it — add it to `.gitignore` if this repo doesn't already ignore it):
 
 ```json
 {
