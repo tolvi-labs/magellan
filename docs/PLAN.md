@@ -1,7 +1,7 @@
 # Tolvi Magellan — Go-Forward Plan
 
-**Status:** Pre-build. New tool, designed 2026-07-23. Inherits Guild's former plan-authoring (its Phase 5) and specializes it into an executor-agnostic, context-compiled plan artifact.
-**Last updated:** 2026-07-23
+**Status:** Built. Designed 2026-07-23, shipped 2026-09-07 as `skills/tolvi-magellan/SKILL.md`, which implements the design below — all four phases of the schematic build plan are implemented, not just planned. Inherits Guild's former plan-authoring (its Phase 5) and specializes it into an executor-agnostic, context-compiled plan artifact.
+**Last updated:** 2026-09-07
 
 ## One-line
 
@@ -13,7 +13,7 @@ Guild was reframed to shed plan-authoring and force comprehension instead (see t
 
 ## What it is
 
-- **A compiler, not an approach-chooser.** Input is Guild's approved brief (`{how, scope, appliedDirectives, resolvedGaps}`); output is the executable plan. The engineer owns the how; Magellan owns the task cuts and the context per cut.
+- **A compiler, not an approach-chooser.** Input is Bastion's hardened brief (`{how, scope, appliedDirectives, resolvedGaps}`) — Guild produces the approved brief, Bastion hardens it, and Magellan consumes Bastion's output; output is the executable plan. The engineer owns the how; Magellan owns the task cuts and the context per cut.
 - **Per-task context compilation is the core mechanism** — each task carries exactly its governing vault decisions, code refs, interfaces, and proving test, retrieved via tolvi. This resolves the accuracy↔cost tension and is the tolvi differentiator.
 - **Decomposition and context-compilation are one pass** — cutting a task fixes its files, dependencies, and acceptance criteria; attaching context requires the cut.
 - **Output = Forge `tasks.json` superset** — the same task DAG plus `context: { decisions, refs, interfaces:{consumes, produces} }` per task.
@@ -31,7 +31,7 @@ Provenance (record-gate at push) and Canary (test-gate in CI) are the downstream
 Plan-first; each phase is dogfooded on one real repo before the next. Harden through Bastion before writing code.
 
 1. **The output schema.** Define the executor-agnostic plan format: Forge's `tasks.json` core (`feature`, `stack`, `tasks[]` with `id`/`title`/`files`/`dependencies`/`acceptance_criteria`) plus the per-task `context` field (`decisions`, `refs`, `interfaces`). Verify it round-trips through Forge's existing `load_manifest` validator unchanged (Forge must ignore `context` without erroring). → verify: a compiled plan runs under `forge plan` and is also readable by a Claude Code executor.
-2. **Decomposition from a brief.** Given Guild's approved brief, cut the approach into a task DAG with dependency edges and per-task acceptance criteria (no placeholders). → verify: the DAG topologically orders, every task has a proving test, and `files` cover the brief's scope with nothing out-of-scope.
+2. **Decomposition from a brief.** Given Bastion's hardened brief, cut the approach into a task DAG with dependency edges and per-task acceptance criteria (no placeholders). → verify: the DAG topologically orders, every task has a proving test, and `files` cover the brief's scope with nothing out-of-scope.
 3. **Per-task context compilation.** For each task, retrieve via tolvi the governing decisions, code refs, and interfaces, and attach only those. → verify: dogfood the accuracy↔cost budget — measure executor token use and error rate; confirm under-compiling (executor guessing) is the failure mode being tuned against, and that accuracy wins ties.
 4. **Executor adapters (thin).** Confirm the one artifact drives Forge, Claude Code, and a cloud agent, each consuming what it understands. → verify: same plan, three executors, equivalent result.
 
@@ -47,4 +47,4 @@ Magellan contributes to correctness structurally (interfaces, a test per task, n
 
 ## Next step
 
-Write the phase-1 kickoff prompt (the output schema slice), run it in this repo, and harden the result through Bastion before any code.
+Dogfood the built skill on a real (non-fixture) repo and task, and calibrate the context-budget assumptions the "Riskiest assumptions" section above names — how much per-task context is enough to stop the executor guessing without creeping cost back to baseline, and whether the retrieval is precise enough that the attached decisions and refs are the right ones. That measurement is empirical and can only come from real runs; the fixture suite proves the mechanism, not the budget.
