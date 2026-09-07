@@ -52,7 +52,7 @@ Approve these cuts, or tell me what to merge/split/reorder before I compile cont
 Per task, three bounded lookups — no subagent, done directly:
 
 - **`decisions`** — run `tolvi ask "<task title + key files>" --json` (or read `vault/decisions/*.md` directly if no `ANTHROPIC_API_KEY` is set). Keep only `status: active` hits — never a `superseded` or `deprecated` one, even if it is topically on point. Label each hit **strong** (clearly on-topic — attach outright) or **possible** (attach only if the task's `files`/`dependencies` plausibly overlap the decision's governed area).
-- **`refs`** — read the task's own `files` (where they pre-exist) and any file a dependency task's acceptance criteria implies it touches, for the actual symbols/signatures at the boundary. Quote `file:line` and the symbol name — never a vague description.
+- **`refs`** — read the task's own `files` (where they pre-exist), any file a dependency task's acceptance criteria implies it touches, or any pre-existing file/symbol the task's own title or the brief's `how` names as infrastructure it must call into, for the actual symbols/signatures at the boundary. Quote `file:line` and the symbol name — never a vague description.
 - **`interfaces`** — derive directly from the DAG edges fixed in Phase 2: for each `dependencies` entry, state what the upstream task produces and this task consumes, as a concrete signature where the code already exists, or a plain-language contract where it doesn't yet.
 
 Inclusion rule: **accuracy wins ties.** Attach a hit unless the task's `files`/`dependencies` demonstrably don't overlap it — under-attaching (the executor guesses) is the failure being guarded against, not over-attaching.
