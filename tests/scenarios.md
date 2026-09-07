@@ -64,3 +64,10 @@ Given a fully compiled plan for `fixtures/toy-brief.json`.
 Expected: the output file is written to `docs/superpowers/plans/YYYY-MM-DD-healthz-tasks.json` (gitignored, confirmed via `git check-ignore`); no vault decision is written automatically; the `MAGELLAN — COMPILED PLAN` block names both the Forge caveat ("context will not survive forge plan next/status/complete") and the Claude Code/cloud-agent handoff; Magellan stops there — it does not offer to execute any task itself.
 
 ✅ traced 2026-09-07
+
+## M10 — Ingest establishes repo context, and no vault is not a blocker
+
+Given: the fixture tree has no `vault/.vault-meta.json` file at all (`fixtures/vault/decisions/` exists as a flat fixture directory, but nothing marks it as a real vault root).
+Expected: Phase 1 Step 3 still completes normally — it establishes `repo` from the cwd basename, attempts to walk up for `vault/.vault-meta.json`, finds none, and proceeds anyway. This is not treated as an error or a reason to stop; Phase 3 simply has fewer `decisions` to attach later.
+
+✅ traced 2026-09-07
