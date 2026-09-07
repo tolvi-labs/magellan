@@ -1,0 +1,11 @@
+{
+  "how": "Add a GET /healthz endpoint that returns 200 with a JSON status body, fronted by the existing RateLimiter middleware so health checks can't be used to bypass rate limits.",
+  "scope": {
+    "in": ["src/healthz.ts", "src/routes.ts"],
+    "out": ["src/auth/middleware.ts"]
+  },
+  "appliedDirectives": ["Public routes register in src/routes.ts, not inline in server.ts — per 2026-06-01-routes-register-in-routes-ts"],
+  "resolvedGaps": [
+    {"question": "Should /healthz require auth?", "answer": "No — health checks must stay unauthenticated so orchestrators can probe them."}
+  ]
+}
