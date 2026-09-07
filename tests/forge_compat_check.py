@@ -27,12 +27,18 @@ def _resolve_forge_src() -> str:
     if env:
         return env
     try:
+        script_dir = Path(__file__).resolve().parent
         common_dir = subprocess.run(
             ["git", "rev-parse", "--git-common-dir"],
-            cwd=Path(__file__).resolve().parent,
+            cwd=script_dir,
             capture_output=True, text=True, check=True,
         ).stdout.strip()
-        main_repo_root = Path(common_dir).resolve().parent
+        # git prints an ABSOLUTE path only from a linked worktree; from a normal
+        # clone it prints one RELATIVE to the cwd we ran it from (script_dir).
+        # `script_dir / common_dir` resolves correctly either way, since
+        # pathlib's `/` short-circuits to the right operand when it's already
+        # absolute.
+        main_repo_root = (script_dir / common_dir).resolve().parent
         candidate = main_repo_root.parent / "forge" / "src"
         if (candidate / "forge" / "plan" / "manifest.py").is_file():
             return str(candidate)
