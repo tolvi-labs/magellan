@@ -56,7 +56,7 @@ Expected: only the active decision is attached to the task's `context.decisions`
 Task "add rate-limit guard on /healthz" depends on task "add /healthz endpoint," and the fixture repo already has `fixtures/toy-repo/src/rateLimiter.ts` exporting `RateLimiter`.
 Expected: the guard task's `context.refs` includes `{file: "fixtures/toy-repo/src/rateLimiter.ts", line: 2, symbol: "RateLimiter"}` (an existing, pre-code symbol, found by reading the file, not invented); its `context.interfaces.consumes` names what the endpoint task produces (the route it registers), derived from the DAG edge, not from code that doesn't exist yet.
 
-✅ traced 2026-09-07
+✅ traced 2026-09-07 (re-traced same day after Phase 3's `refs` bullet was widened with a third source — the task's own title or the brief's `how` naming pre-existing infrastructure. The toy brief's `how` explicitly names "the existing RateLimiter middleware," so this now resolves cleanly under a strict reading of the bullet, not just a charitable one.)
 
 ## M9 — Output, routing, and terminal state
 
