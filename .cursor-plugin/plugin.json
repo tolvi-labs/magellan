@@ -1,0 +1,19 @@
+{
+  "name": "tolvi-magellan",
+  "version": "0.1.0",
+  "description": "Compile an approved brief into an executable task DAG",
+  "author": {
+    "name": "Tolvi Labs",
+    "url": "https://tolvilabs.com"
+  },
+  "homepage": "https://tolvilabs.com/magellan",
+  "repository": "https://github.com/tolvi-labs/magellan",
+  "license": "Apache-2.0",
+  "keywords": [
+    "vault",
+    "planning",
+    "task-decomposition"
+  ],
+  "displayName": "Magellan",
+  "skills": "./skills/"
+}

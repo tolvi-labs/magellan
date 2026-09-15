@@ -1,0 +1,6 @@
+{
+  "name": "tolvi-magellan",
+  "description": "Compile an approved brief into an executable task DAG",
+  "version": "0.1.0",
+  "contextFileName": "GEMINI.md"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "tolvi-magellan",
+  "version": "0.1.0",
+  "description": "Compile an approved brief into an executable task DAG",
+  "author": {
+    "name": "Tolvi Labs",
+    "url": "https://tolvilabs.com"
+  },
+  "homepage": "https://tolvilabs.com/magellan",
+  "repository": "https://github.com/tolvi-labs/magellan",
+  "license": "Apache-2.0",
+  "keywords": [
+    "vault",
+    "planning",
+    "task-decomposition"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Magellan",
+    "shortDescription": "Compile an approved brief into an executable task DAG",
+    "longDescription": "Magellan takes an engineer-approved brief and compiles it into a decomposed task DAG that carries exactly the decisions, refs and interfaces each task needs. Forge, Claude Code or a cloud agent can execute the result.",
+    "developerName": "Tolvi Labs",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://tolvilabs.com",
+    "privacyPolicyURL": "https://tolvilabs.com/privacy",
+    "termsOfServiceURL": "https://tolvilabs.com/terms",
+    "brandColor": "#84CC16"
+  }
+}

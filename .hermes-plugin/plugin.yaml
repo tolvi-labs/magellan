@@ -1,0 +1,6 @@
+name: tolvi-magellan
+version: 0.1.0
+description: Compile an approved brief into an executable task DAG
+author: Tolvi Labs
+# No provides_hooks: this plugin ships skills, not a Python hook implementation.
+# Declaring a hook it does not implement would fail at load rather than degrade.
