@@ -6,7 +6,7 @@ Forge's actual tasks.json validator. Run with Forge's own venv so the exact
 being checked against — not a reimplementation.
 
 Usage:
-    /Users/alantorres/tolvi-labs/forge/.venv/bin/python3 tests/forge_compat_check.py
+    ../forge/.venv/bin/python3 tests/forge_compat_check.py
 
 Forge's source tree is located automatically as a sibling checkout (tolvi-labs/forge
 next to tolvi-labs/magellan). Override it with FORGE_SRC if it lives elsewhere:
