@@ -1,0 +1,17 @@
+{
+  "name": "tolvi-magellan",
+  "description": "Executor-agnostic plan compiler: turns an approved brief into a context-compiled task DAG that carries exactly the decisions and refs each task needs.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Tolvi Labs",
+    "url": "https://tolvilabs.com"
+  },
+  "homepage": "https://tolvilabs.com/magellan",
+  "repository": "https://github.com/tolvi-labs/magellan",
+  "license": "Apache-2.0",
+  "keywords": [
+    "vault",
+    "planning",
+    "task-decomposition"
+  ]
+}
