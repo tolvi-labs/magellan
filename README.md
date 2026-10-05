@@ -35,7 +35,7 @@ Its output is a superset of Forge's `tasks.json`: the same task DAG (`id`, `titl
   └─ 4. Emit & route  → write tasks.json, hand off to Forge / Claude Code / a cloud agent, and stop
 ```
 
-**With Forge as the executor,** run `forge plan load <tasks.json> --path <repo>` and then `forge agents run --apply --path <repo>`: Forge keeps each task's `context`, hands it to the local model with the task's files, and commits each approved change on a `forge/<feature>` branch for review. Claude Code and cloud-agent executors read Magellan's output file directly.
+**With Forge as the executor,** run `forge plan load <tasks.json> --path <repo>` and then `forge agents run --apply --path <repo>`: Forge keeps each task's `context`, hands it to the local model with the task's files, and commits each approved change on a `forge/<feature>` branch for review. Magellan writes the plan to `docs/superpowers/plans/YYYY-MM-DD-<feature>-tasks.json` in the target repo. Review the branch with `forge verify`, then record each task with `forge outcome`. Claude Code and cloud-agent executors read Magellan's output file directly.
 
 ## Design principles
 

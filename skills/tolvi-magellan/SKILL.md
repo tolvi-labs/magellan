@@ -32,7 +32,7 @@ Magellan is the compiler at the plan→execute boundary: it takes an engineer-ap
 
 **Announce at start:** "Using Magellan to compile the hardened brief into a context-enriched task DAG."
 
-Pipeline: **Guild (brief) → Bastion (harden) → Magellan (compile) → Forge / Claude Code / cloud (execute).**
+Pipeline: **Vault → Guild (brief) → Bastion (harden) → Magellan (compile) → Forge / Claude Code / cloud (execute).**
 
 Arguments: $ARGUMENTS
 
