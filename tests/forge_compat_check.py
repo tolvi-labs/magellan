@@ -121,8 +121,9 @@ print("OK: Magellan-shaped output (with per-task `context`) validates against Fo
 manifest = Manifest.from_dict(VALID_MAGELLAN_OUTPUT)
 assert manifest.feature == "Healthz"
 assert len(manifest.tasks) == 2
-assert not hasattr(manifest.tasks[0], "context"), "Forge's Task dataclass must not carry `context`"
-print("OK: Manifest.from_dict() parses the file without erroring and silently drops `context`, as expected")
+assert manifest.tasks[0].context == VALID_MAGELLAN_OUTPUT["tasks"][0]["context"], \
+    "Forge's Task must carry Magellan's per-task `context` through to the code agent"
+print("OK: Manifest.from_dict() parses the file and keeps each task's `context`")
 
 # --- Forge's FULL load path: `load_manifest` does jsonschema.validate AND a
 #     referential-integrity pass (every `dependencies` entry must name a task id

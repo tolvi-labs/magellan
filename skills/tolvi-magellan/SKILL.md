@@ -100,7 +100,7 @@ Write the compiled artifact to `docs/superpowers/plans/YYYY-MM-DD-<feature-slug>
       "acceptance_criteria": ["<string>"],
       "context": {
         "decisions": [{"path": "<string>", "title": "<string>", "rationale": "<string>"}],
-        "refs": [{"file": "<string>", "line": "<number>", "symbol": "<string>"}],
+        "refs": [{"file": "<string>", "line": <integer>, "symbol": "<string>"}],
         "interfaces": {"consumes": ["<string>"], "produces": ["<string>"]}
       }
     }
@@ -117,8 +117,7 @@ Feature: <feature>
 Output: <path>
 Tasks: <N> | Context attached: <M decisions, K refs total>
 Executor notes:
-  - Forge: `forge plan load <path>` — context will not survive forge plan next/status/complete;
-    Forge's own internal snapshot keeps only the 5 fields it has always validated.
+  - Forge: `forge plan load <path> --path <repo>`, then `forge agents run --apply --path <repo>`; each task's context reaches the local model.
   - Claude Code / cloud agent: read <path> directly per task, including its context.
 ──────────────────────────────────────
 ```

@@ -61,7 +61,7 @@ Expected: the guard task's `context.refs` includes `{file: "fixtures/toy-repo/sr
 ## M9 — Output, routing, and terminal state
 
 Given a fully compiled plan for `fixtures/toy-brief.json`.
-Expected: the output file is written to `docs/superpowers/plans/YYYY-MM-DD-healthz-tasks.json` (gitignored, confirmed via `git check-ignore`); no vault decision is written automatically; the `MAGELLAN — COMPILED PLAN` block names both the Forge caveat ("context will not survive forge plan next/status/complete") and the Claude Code/cloud-agent handoff; Magellan stops there — it does not offer to execute any task itself.
+Expected: the output file is written to `docs/superpowers/plans/YYYY-MM-DD-healthz-tasks.json` (gitignored, confirmed via `git check-ignore`); no vault decision is written automatically; the `MAGELLAN — COMPILED PLAN` block names both the Forge handoff (`forge plan load` then `forge agents run --apply`) and the Claude Code/cloud-agent handoff; Magellan stops there — it does not offer to execute any task itself.
 
 ✅ traced 2026-09-07
 

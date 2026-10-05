@@ -22,7 +22,7 @@ Invoke `/tolvi-magellan <bastion-hardened brief>` in Claude Code. Use `--copy` f
 
 Magellan receives Bastion's hardened brief and compiles it into an executable plan. It decomposes the approach into a task DAG and, in the same pass, compiles each task's context: the governing vault decisions, the specific code refs, the interface it consumes and produces, and the test that proves it. The engineer owns the *how*; Magellan owns the *cut into tasks* and the *context per cut*.
 
-Its output is a superset of Forge's `tasks.json`: the same task DAG (`id`, `title`, `files`, `dependencies`, `acceptance_criteria`) plus one field per task, `context: { decisions, refs, interfaces }`. Forge reads the core fields it validates; Claude Code and cloud agents read the `context` bundle and execute with exactly-enough context.
+Its output is a superset of Forge's `tasks.json`: the same task DAG (`id`, `title`, `files`, `dependencies`, `acceptance_criteria`) plus one field per task, `context: { decisions, refs, interfaces }`. Forge, Claude Code, and cloud agents all read the `context` bundle and execute with exactly-enough context.
 
 ## Core loop
 
@@ -35,7 +35,7 @@ Its output is a superset of Forge's `tasks.json`: the same task DAG (`id`, `titl
   └─ 4. Emit & route  → write tasks.json, hand off to Forge / Claude Code / a cloud agent, and stop
 ```
 
-**One caveat that matters:** if Forge is the executor, `forge plan load` re-serializes its own internal snapshot using only the 5 fields it has always validated: `context` never reaches `forge plan next/status/complete`. Claude Code and cloud-agent executors read Magellan's output file directly and don't hit this limitation.
+**With Forge as the executor,** run `forge plan load <tasks.json> --path <repo>` and then `forge agents run --apply --path <repo>`: Forge keeps each task's `context`, hands it to the local model with the task's files, and commits each approved change on a `forge/<feature>` branch for review. Claude Code and cloud-agent executors read Magellan's output file directly.
 
 ## Design principles
 
